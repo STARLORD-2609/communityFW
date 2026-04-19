@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>📊 Admin Dashboard</h1>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Average Score</h3>
+            <p id="avgScore">0%</p>
+        </div>
+    </div>
+
+    <input type="text" id="search" placeholder="Search by name..." onkeyup="searchUser()">
+
+    <table id="quizTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+</div>
+
+<script src="admin.js"></script>
+
+</body>
+</html>

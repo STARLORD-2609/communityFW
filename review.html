@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Quiz</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="logo">CyberSafe - Community Project</div>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="awarness-info.html">Awareness</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+        <li><a href="review.html">Review</a></li>
+      </ul>
+    </div>
+
+    <!-- User Form -->
+    <div class="user-form" id="userForm">
+      <h2>Enter Your Details</h2>
+
+      <input type="text" id="fullName" placeholder="Full Name" />
+
+      <select id="age">
+        <option value="">Select Age</option>
+        <option value="18">18</option>
+        <option value="19">19</option>
+        <option value="20">20</option>
+        <option value="21">21</option>
+        <option value="22">22</option>
+        <option value="23">23</option>
+        <option value="24">24</option>
+        <option value="25">25</option>
+      </select>
+      <p>
+        This survey is conducted solely for academic purposes. The identity of
+        the participants will not be disclosed under any circumstances at any
+        point in time.
+      </p>
+
+      <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quizSection" style="display: none">
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <button onclick="nextQuestion()">Next</button>
+    </div>
+    <!-- RESULT SECTION -->
+    <div id="resultSection" style="display: none; text-align: center">
+      <div class="circle" id="circle">
+        <span id="percent">0%</span>
+      </div>
+
+      <div id="resultText"></div>
+
+      <canvas id="resultChart" width="300" height="200"></canvas>
+      <button onclick="showTips()" class="tips-btn">
+        Improve My Cyber Safety
+      </button>
+
+      <div id="tipsSection" style="display: none">
+        <h2>Your Personalized Cyber Safety Report</h2>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </body>
+</html>

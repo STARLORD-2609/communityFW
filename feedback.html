@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Feedback</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+
+
+
+<!-- Navbar -->
+<div class="navbar">
+    <div class="logo">CyberSafe</div>
+    <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="review.html">Quiz</a></li>
+        <li><a href="awarness-info.html">Awareness</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="feedback.html" class="active">Feedback</a></li>
+    </ul>
+</div>
+
+<div class="feedback-container">
+
+<h1>Feedback Form</h1>
+<p class="feedback-intro">
+We value your experience with our Cybersecurity Awareness System. 
+Please share your feedback about the website, quiz, and overall usability. 
+Your suggestions will help us improve the platform and make it more effective for promoting safe online practices.
+</p>
+
+<div class="card">
+
+<label>Name</label>
+<input type="text" id="name" readonly>
+
+<label>Rate Your Experience</label>
+
+<div class="stars">
+    <span onclick="rate(1)">⭐</span>
+    <span onclick="rate(2)">⭐</span>
+    <span onclick="rate(3)">⭐</span>
+    <span onclick="rate(4)">⭐</span>
+    <span onclick="rate(5)">⭐</span>
+</div>
+
+<p id="ratingText"></p>
+
+<label>Your Feedback</label>
+<textarea id="message" placeholder="Write your feedback..."></textarea>
+
+<button onclick="submitFeedback()">Submit</button>
+
+<p id="msg"></p>
+
+</div>
+
+</div>
+
+
+<script src="script.js"></script>
+</body>
+</html>
