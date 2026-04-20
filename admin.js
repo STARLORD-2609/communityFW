@@ -2,7 +2,7 @@ let allData = [];
 
 async function loadData() {
     try {
-        const res = await fetch("http://localhost:5000/quiz");
+        const res = await fetch("https://communityfw-api.onrender.com/quiz");
         const data = await res.json();
 
         allData = data;

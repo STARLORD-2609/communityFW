@@ -318,7 +318,7 @@ function submitFeedback() {
 
 async function submitQuiz(name, age, score) {
     try {
-        const response = await fetch("http://localhost:5000/quiz", {
+        const response = await fetch("https://communityfw-api.onrender.com/quiz", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
