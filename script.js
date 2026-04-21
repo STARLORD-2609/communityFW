@@ -321,7 +321,7 @@ function submitFeedback() {
 
 
 
-aasync function submitQuiz(name, age, score, awareness_level) {
+async function submitQuiz(name, age, score, awareness_level) {
     try {
         const response = await fetch("https://communityfw-api.onrender.com/quiz", {
             method: "POST",
