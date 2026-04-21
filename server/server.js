@@ -32,9 +32,9 @@ app.post("/quiz", async (req, res) => {
         }
 
         await pool.query(
-            "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4)",
-            [name, age, score, awareness_level]
-        );
+  "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4) ON CONFLICT DO NOTHING",
+  [name, age, score, awareness_level]
+);
 
         res.json({ message: "Quiz data saved successfully" });
 
