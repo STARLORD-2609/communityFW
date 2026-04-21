@@ -242,3 +242,56 @@ function showError(msg) {
     const errorBox = document.getElementById("nameError");
     errorBox.innerText = msg;
 }
+//Tips FOr Improvement
+function showTips() {
+    const tipsSection = document.getElementById("tipsSection");
+    tipsSection.style.display = "block";
+
+    let tips = "<h3>🔐 Your Cyber Safety Tips:</h3><ul>";
+
+    if (userAnswers[0] !== 0) {
+        tips += "<li>Use a strong password, PIN, or biometric lock.</li>";
+    }
+
+    if (userAnswers[1] !== 2) {
+        tips += "<li>Avoid using same password for multiple accounts.</li>";
+    }
+
+    if (userAnswers[2] !== 0) {
+        tips += "<li>Use a password manager to store secure passwords.</li>";
+    }
+
+    if (userAnswers[3] !== 0) {
+        tips += "<li>Enable Two-Factor Authentication (2FA).</li>";
+    }
+
+    if (userAnswers[5] !== 0) {
+        tips += "<li>Keep your apps and device updated.</li>";
+    }
+
+    if (userAnswers[6] !== 0) {
+        tips += "<li>Check app permissions before allowing access.</li>";
+    }
+
+    if (userAnswers[10] !== 0) {
+        tips += "<li>Avoid clicking suspicious links or unknown messages.</li>";
+    }
+
+    if (userAnswers[12] !== 0) {
+        tips += "<li>Keep your social media profiles private.</li>";
+    }
+
+  
+    if (userAnswers[13] !== 0) {
+        tips += "<li>Never share personal info with strangers online.</li>";
+    }
+
+    
+    if (tips === "<h3>🔐 Your Cyber Safety Tips:</h3><ul>") {
+        tips += "<li>Great job! Your cyber awareness is strong 👍</li>";
+    }
+
+    tips += "</ul>";
+
+    tipsSection.innerHTML = tips;
+}
