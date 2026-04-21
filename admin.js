@@ -54,3 +54,31 @@ function searchUser() {
 }
 
 loadData();
+//Awareness Column 
+
+data.forEach(user => {
+    let color = "";
+
+    if (user.awareness_level === "Low Awareness") color = "red";
+    else if (user.awareness_level === "Moderate Awareness") color = "orange";
+    else color = "green";
+
+    html += `
+        <tr>
+            <td>${user.name}</td>
+            <td>${user.age}</td>
+            <td>${user.score}</td>
+            <td style="color:${color}; font-weight:bold;">
+                ${user.awareness_level}
+            </td>
+        </tr>
+    `;
+});
+//Awareness Bar
+let low = 0, moderate = 0, high = 0;
+
+data.forEach(user => {
+    if (user.awareness_level === "Low Awareness") low++;
+    else if (user.awareness_level === "Moderate Awareness") moderate++;
+    else high++;
+});

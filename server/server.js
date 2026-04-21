@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 
 // Quiz save
 app.post("/quiz", async (req, res) => {
-    const { name, age, score } = req.body;
+    const { name, age, score, awareness_level } = req.body;
     console.log("DATA RECEIVED:", name, age, score);
 
     try {

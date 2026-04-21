@@ -98,25 +98,30 @@ answer:0
 ];
 
 
-// START Review
+// START Review Name Ani 
 function startQuiz() {
-    const name = document.getElementById("fullName").value;
+    const name = document.getElementById("fullName").value.trim();
     const age = document.getElementById("age").value;
+
+    const nameRegex = /^[A-Za-z ]+$/;
 
     if (name === "" || age === "") {
         alert("Enter all details");
         return;
     }
 
+    if (!nameRegex.test(name)) {
+        alert("Name should contain only alphabets");
+        return;
+    }
+
     localStorage.setItem("name", name);
-localStorage.setItem("age", age); 
 
     document.getElementById("userForm").style.display = "none";
     document.getElementById("quizSection").style.display = "block";
 
     loadQuestion();
 }
-
 // LOAD QUESTION
 function loadQuestion() {
     const q = questions[current];
@@ -163,7 +168,7 @@ function showResult() {
     document.getElementById("resultSection").style.display = "block";
 
     const name = localStorage.getItem("name");
-const age = localStorage.getItem("age"); // <-- हे add कर
+const age = localStorage.getItem("age"); 
 
 let percentage = (score / 15) * 100;
 
@@ -173,17 +178,17 @@ let percentage = (score / 15) * 100;
     else level = "High Awareness";
 
     document.getElementById("resultText").innerHTML = `
-        <h2>Welcome ${name}</h2>
+        <h2>Hi, ${name} Your Result is Here!</h2>
         <h3>${level}</h3>
         <p>Your Score: ${percentage.toFixed(2)}%</p>
     `;
 
-    // 👉 BACKEND CALL 🔥
+    // BACKEND CALL 
     submitQuiz(name, age, Math.round(percentage));
 
     animateCircle(percentage);
     showChart(score);
-    submitQuiz(name, age, score);
+    submitQuiz(name, age, score,level);
 }
 function showChart(score) {
     const ctx = document.getElementById('resultChart').getContext('2d');
@@ -316,7 +321,7 @@ function submitFeedback() {
 
 
 
-async function submitQuiz(name, age, score) {
+aasync function submitQuiz(name, age, score, awareness_level) {
     try {
         const response = await fetch("https://communityfw-api.onrender.com/quiz", {
             method: "POST",
@@ -326,7 +331,8 @@ async function submitQuiz(name, age, score) {
             body: JSON.stringify({
                 name: name,
                 age: age,
-                score: score
+                score: score,
+                awareness_level: awareness_level
             })
         });
 
@@ -336,3 +342,15 @@ async function submitQuiz(name, age, score) {
         console.error("Error:", error);
     }
 }
+//Error CONtainer
+document.getElementById("fullName").addEventListener("input", function () {
+    const name = this.value;
+    const error = document.getElementById("nameError");
+    const nameRegex = /^[A-Za-z ]*$/;
+
+    if (!nameRegex.test(name)) {
+        error.innerText = "Only alphabets allowed";
+    } else {
+        error.innerText = "";
+    }
+});

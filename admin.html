@@ -13,12 +13,11 @@
 
     <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
-        <li><a href="review.html">Review</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="awarness-info.html">Awareness</a></li>
+        <li><a href="review.html">Take a TEST</a></li>
+        <li><a href="awarness-info.html">Know More</a></li>
+        <li><a href="about.html">About US</a></li>
         <li><a href="feedback.html">Feedback</a></li>
-        
-    </ul>
+      </ul>
 </div>
 
 <div class="container">
@@ -37,15 +36,38 @@
         </div>
     </div>
 
+<div class="filters">
+
     <input type="text" id="search" placeholder="Search by name..." onkeyup="searchUser()">
 
+  <select id="filterLevel">
+    <option value="">All Levels</option>
+    <option value="Low Awareness">Low Awareness</option>
+    <option value="Moderate Awareness">Moderate Awareness</option>
+    <option value="High Awareness">High Awareness</option>
+  </select>
+
+  <select id="sortName">
+    <option value="">Sort Name</option>
+    <option value="asc">A-Z</option>
+    <option value="desc">Z-A</option>
+  </select>
+
+  <select id="sortAge">
+    <option value="">Sort Age</option>
+    <option value="low">Low to High</option>
+    <option value="high">High to Low</option>
+  </select>
+
+</div>
     <table id="quizTable">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Score</th>
-            </tr>
+  <th>Name</th>
+  <th>Age</th>
+  <th>Score</th>
+  <th>Awareness</th>
+</tr>
         </thead>
         <tbody></tbody>
     </table>

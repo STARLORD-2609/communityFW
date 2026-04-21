@@ -93,6 +93,7 @@ tr:nth-child(even) {
 
 
 
+
 /* Nav links */
 .nav-links {
     list-style: none;
@@ -195,4 +196,18 @@ tr:nth-child(even) {
     border-radius: 15px;
     text-align: center;
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+
+/*search filter*/
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.filters input,
+.filters select {
+  padding: 8px;
 }

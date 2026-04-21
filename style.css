@@ -364,3 +364,10 @@ canvas {
   width: 100% !important;
   height: auto !important;
 }
+/*ERROR MASSAGE CONTainer */
+.error {
+  color: red;
+  font-size: 13px;
+  display: block;
+  margin-top: 5px;
+}
