@@ -21,21 +21,20 @@ app.get("/", (req, res) => {
 
 // Quiz save
 app.post("/quiz", async (req, res) => {
+  try {
     const { name, age, score, awareness_level } = req.body;
-    console.log("DATA RECEIVED:", name, age, score);
 
-    try {
-        await pool.query(
-            "INSERT INTO quiz(name, age, score) VALUES($1, $2, $3)",
-            [name, age, score]
-        );
+    await pool.query(
+      "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4)",
+      [name, age, score, awareness_level]
+    );
 
-        res.json({ message: "Quiz saved successfully" });
+    res.json({ message: "Data inserted successfully" });
 
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Error saving quiz" });
-    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Error inserting data" });
+  }
 });
 
 // Feedback save

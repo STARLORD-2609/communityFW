@@ -176,6 +176,7 @@ let percentage = (score / 15) * 100;
     if (percentage < 40) level = "Low Awareness";
     else if (percentage <= 80) level = "Moderate Awareness";
     else level = "High Awareness";
+    submitQuiz(name, age, score, level);
 
     document.getElementById("resultText").innerHTML = `
         <h2>Hi, ${name} Your Result is Here!</h2>
@@ -332,7 +333,7 @@ async function submitQuiz(name, age, score, awareness_level) {
                 name: name,
                 age: age,
                 score: score,
-                awareness_level: awareness_level
+                awareness_level: awareness_level,
             })
         });
 
