@@ -1,71 +1,89 @@
-require("dotenv").config(); // TOP ला ठेव
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 const pool = require("./db");
 
 const app = express();
 
-// IMPORTANT for Render
+// PORT
 const PORT = process.env.PORT || 5000;
 
+// MIDDLEWARE
 app.use(cors());
-app.use(bodyParser.json());
-app.use(express.json());
+app.use(express.json()); 
 
-// ROOT route (VERY IMPORTANT)
+// ROOT route
 app.get("/", (req, res) => {
     res.send("Server is working 🚀");
 });
 
-// Quiz save
+
+// ================= QUIZ SAVE =================
 app.post("/quiz", async (req, res) => {
-  try {
-    const { name, age, score, awareness_level } = req.body;
+    try {
+        const { name, age, score, awareness_level } = req.body;
 
-    await pool.query(
-      "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4)",
-      [name, age, score, awareness_level]
-    );
+        // ✅ VALIDATION
+        if (!name || !age || score === undefined || !awareness_level) {
+            return res.status(400).json({
+                error: "All fields are required"
+            });
+        }
 
-    res.json({ message: "Data inserted successfully" });
+        await pool.query(
+            "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4)",
+            [name, age, score, awareness_level]
+        );
 
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Error inserting data" });
-  }
+        res.json({ message: "Quiz data saved successfully" });
+
+    } catch (err) {
+        console.error("Quiz Insert Error:", err);
+        res.status(500).json({ error: "Server error" });
+    }
 });
 
-// Feedback save
+
+// ================= GET QUIZ DATA =================
+app.get("/quiz", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT * FROM quiz ORDER BY id DESC"
+        );
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Fetch Error:", err);
+        res.status(500).json({ error: "Error fetching data" });
+    }
+});
+
+
+// ================= FEEDBACK =================
 app.post("/feedback", async (req, res) => {
     try {
         const { name, rating, message } = req.body;
+
+        if (!name || !rating || !message) {
+            return res.status(400).json({
+                error: "All fields required"
+            });
+        }
 
         await pool.query(
             "INSERT INTO feedback(name, rating, message) VALUES ($1,$2,$3)",
             [name, rating, message]
         );
 
-        res.send("Feedback saved");
+        res.json({ message: "Feedback saved successfully" });
+
     } catch (err) {
-        console.error(err);
-        res.status(500).send("Error saving feedback");
+        console.error("Feedback Error:", err);
+        res.status(500).json({ error: "Error saving feedback" });
     }
 });
 
-// Get all quiz data (ADMIN)
-app.get("/quiz", async (req, res) => {
-    try {
-        const result = await pool.query("SELECT * FROM quiz ORDER BY score DESC");
-        res.json(result.rows);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Error fetching data" });
-    }
-});
 
-// START SERVER (IMPORTANT CHANGE)
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

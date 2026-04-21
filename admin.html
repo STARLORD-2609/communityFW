@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <div class="navbar">
+
+<div class="navbar">
     <div class="logo">CyberSafe - A Community Project</div>
 
     <ul class="nav-links">
@@ -17,13 +18,14 @@
         <li><a href="awarness-info.html">Know More</a></li>
         <li><a href="about.html">About US</a></li>
         <li><a href="feedback.html">Feedback</a></li>
-      </ul>
+    </ul>
 </div>
 
 <div class="container">
 
     <h1>📊 Admin Dashboard</h1>
 
+    <!-- STATS -->
     <div class="cards">
         <div class="card">
             <h3>Total Users</h3>
@@ -36,45 +38,62 @@
         </div>
     </div>
 
-<div class="filters">
+    <!-- 🔥 AWARENESS BAR ADD -->
+    <div class="awareness-section">
+        <h3>Awareness Distribution</h3>
 
-    <input type="text" id="search" placeholder="Search by name..." onkeyup="searchUser()">
+        <div class="awareness-bar">
+            <div id="lowBar" class="low"></div>
+            <div id="moderateBar" class="moderate"></div>
+            <div id="highBar" class="high"></div>
+        </div>
 
-  <select id="filterLevel">
-    <option value="">All Levels</option>
-    <option value="Low Awareness">Low Awareness</option>
-    <option value="Moderate Awareness">Moderate Awareness</option>
-    <option value="High Awareness">High Awareness</option>
-  </select>
+        <p>
+            Low: <span id="lowCount">0</span> |
+            Moderate: <span id="moderateCount">0</span> |
+            High: <span id="highCount">0</span>
+        </p>
+    </div>
 
-  <select id="sortName">
-    <option value="">Sort Name</option>
-    <option value="asc">A-Z</option>
-    <option value="desc">Z-A</option>
-  </select>
+    <!-- FILTERS -->
+    <div class="filters">
 
-  <select id="sortAge">
-    <option value="">Sort Age</option>
-    <option value="low">Low to High</option>
-    <option value="high">High to Low</option>
-  </select>
+        <input type="text" id="search" placeholder="Search by name...">
 
-</div>
+        <select id="filterLevel">
+            <option value="">All Levels</option>
+            <option value="Low Awareness">Low Awareness</option>
+            <option value="Moderate Awareness">Moderate Awareness</option>
+            <option value="High Awareness">High Awareness</option>
+        </select>
+
+        <select id="sortName">
+            <option value="">Sort Name</option>
+            <option value="asc">A-Z</option>
+            <option value="desc">Z-A</option>
+        </select>
+
+        <select id="sortAge">
+            <option value="">Sort Age</option>
+            <option value="low">Low to High</option>
+            <option value="high">High to Low</option>
+        </select>
+
+    </div>
+
+    <!-- TABLE -->
     <table id="quizTable">
         <thead>
             <tr>
-  <th>Name</th>
-  <th>Age</th>
-  <th>Score</th>
-  <th>Awareness</th>
-</tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Score</th>
+                <th>Awareness</th>
+            </tr>
         </thead>
         <tbody></tbody>
     </table>
 
-</div>
-<div class="table-container">
-  <table>...</table>
 </div>
 
 <script src="admin.js"></script>
