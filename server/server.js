@@ -5,15 +5,13 @@ const cors = require("cors");
 const pool = require("./db");
 
 const app = express();
-
-// PORT
 const PORT = process.env.PORT || 5000;
 
 // MIDDLEWARE
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 
-// ROOT route
+// ROOT
 app.get("/", (req, res) => {
     res.send("Server is working 🚀");
 });
@@ -22,19 +20,27 @@ app.get("/", (req, res) => {
 // ================= QUIZ SAVE =================
 app.post("/quiz", async (req, res) => {
     try {
-        const { name, age, score, awareness_level } = req.body;
+        const { name, age, score, correct_answers, awareness_level } = req.body;
 
-        // ✅ VALIDATION
-        if (!name || !age || score === undefined || !awareness_level) {
+        // VALIDATION
+        if (!name || !age || score === undefined || correct_answers === undefined || !awareness_level) {
             return res.status(400).json({
                 error: "All fields are required"
             });
         }
 
+        // 👉 IMPORTANT: same user ची जुनी entry delete (latest ठेवतो)
         await pool.query(
-  "INSERT INTO quiz (name, age, score, awareness_level) VALUES ($1, $2, $3, $4) ON CONFLICT DO NOTHING",
-  [name, age, score, awareness_level]
-);
+            "DELETE FROM quiz WHERE name = $1 AND age = $2",
+            [name, age]
+        );
+
+        // 👉 नवीन insert
+        await pool.query(
+            `INSERT INTO quiz (name, age, score, correct_answers, awareness_level)
+             VALUES ($1, $2, $3, $4, $5)`,
+            [name, age, score, correct_answers, awareness_level]
+        );
 
         res.json({ message: "Quiz data saved successfully" });
 
@@ -49,8 +55,11 @@ app.post("/quiz", async (req, res) => {
 app.get("/quiz", async (req, res) => {
     try {
         const result = await pool.query(
-            "SELECT * FROM quiz ORDER BY id DESC"
+            `SELECT name, age, score, correct_answers, awareness_level 
+             FROM quiz
+             ORDER BY score DESC`
         );
+
         res.json(result.rows);
     } catch (err) {
         console.error("Fetch Error:", err);

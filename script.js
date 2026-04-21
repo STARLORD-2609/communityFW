@@ -2,7 +2,7 @@ let userAnswers = [];
 let current = 0;
 let score = 0;
 
-// QUESTIONS
+// QUESTIONS (FULL ADD)
 const questions = [
 {
 q:"Do you use a password, PIN, or biometric lock on your device?",
@@ -83,8 +83,11 @@ answer:0
 
 // START QUIZ
 function startQuiz() {
-    const name = document.getElementById("fullName").value.trim();
-    const age = document.getElementById("age").value;
+    const nameInput = document.getElementById("fullName");
+    const ageInput = document.getElementById("age");
+
+    const name = nameInput.value.trim();
+    const age = ageInput.value;
 
     const nameRegex = /^[A-Za-z ]+$/;
 
@@ -94,9 +97,12 @@ function startQuiz() {
     }
 
     if (!nameRegex.test(name)) {
-        showError("Name should contain only alphabets");
+        showError("Only alphabets allowed");
         return;
     }
+
+    // clear error
+    showError("");
 
     localStorage.setItem("name", name);
     localStorage.setItem("age", age);
@@ -134,6 +140,8 @@ function nextQuestion() {
         return;
     }
 
+    showError("");
+
     if (parseInt(selected.value) === questions[current].answer) {
         score++;
     }
@@ -167,9 +175,11 @@ function showResult() {
         <h2>Hi, ${name}</h2>
         <h3>${awareness}</h3>
         <p>Score: ${percentage.toFixed(2)}%</p>
+        <p>Correct Answers: ${score}/15</p>
     `;
 
-    submitQuiz(name, age, Math.round(percentage), awareness);
+    // ONE API CALL (correct)
+    submitQuiz(name, age, Math.round(percentage), score, awareness);
 
     animateCircle(percentage);
     showChart(score);
@@ -207,7 +217,7 @@ function animateCircle(percent) {
 }
 
 // API CALL
-async function submitQuiz(name, age, score, awareness_level) {
+async function submitQuiz(name, age, score, correct_answers, awareness_level) {
     try {
         await fetch("https://communityfw-api.onrender.com/quiz", {
             method: "POST",
@@ -218,6 +228,7 @@ async function submitQuiz(name, age, score, awareness_level) {
                 name,
                 age,
                 score,
+                correct_answers,
                 awareness_level
             })
         });
