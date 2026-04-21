@@ -239,10 +239,26 @@ button {
     box-shadow: 0 0 15px #38bdf8;
 }
 
-.card ul {
+.card-link ul {
     text-align: left;
 }
 
+.card-link {
+    background: #8dadba;
+    padding: 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.card-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #38bdf8;
+}
+
+.card-link ul {
+    text-align: left;
+}
 
 
 
